@@ -218,11 +218,11 @@ Os gráficos do tempo de execução de cada algoritmo (Serial e Paralelo) foram 
 from mpi4py import MPI 
 
 import os
-
+import sys
 import random  
   
 
-tam_medicoes = 8  
+tam_medicoes = int(sys.argv[1]) 
 
 comm = MPI.COMM_WORLD
 
@@ -319,7 +319,7 @@ print('Total de combinações com a soma no processo %d: %d' % (id,total))
 #### **Script3**
 Executando o código acima, sendo o tamanho das medições 8 e o valor da soma 15, assim como no teste do "Código 1".
 ~~~python
- !mpirun --allow-run-as-root -np 2 python codigoobi2.py
+ !mpirun --allow-run-as-root -np 2 python codigoobi2.py 8
 ~~~
 #### **Script4**
 ~~~python
@@ -333,7 +333,7 @@ for i in  range(15,  23):
 
 tempo_atual = t.time()
 
-string = 'python codigoobi2.py '+str(i)+' >> /dev/null'  #Jogando a saida para null para não poluir o terminal
+string = 'mpirun --allow-run-as-root -np 2 python codigoobi2.py '+str(i)+' >> /dev/null'  #Jogando a saida para null para não poluir o terminal
 
 !$string
 
